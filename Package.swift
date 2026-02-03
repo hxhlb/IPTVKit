@@ -13,7 +13,7 @@ let package = Package(
         .library(name: "IPTVKit", targets: ["IPTVKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/tid-kijyun/Kanna", .upToNextMajor(from: "6.0.1"))
+        .package(url: "https://github.com/tid-kijyun/Kanna", .upToNextMajor(from: "5.2.7"))
     ],
     targets: [
         .target(name: "IPTVKit", dependencies: ["Kanna"], path: "Sources"),

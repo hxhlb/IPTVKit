@@ -26,4 +26,13 @@ public struct TVProgramme: Hashable, Codable {
     
     /// The desc of the programme.
     public let desc: String?
+    
+    public init(start: String, stop: String, channel: String, channelName: String? = nil, title: String, desc: String?) {
+        self.start = start
+        self.stop = stop
+        self.channel = channel
+        self.channelName = channelName
+        self.title = title
+        self.desc = desc
+    }
 }

@@ -9,7 +9,7 @@ public struct TVParser {
         var group: String?
         text.enumerateLines { line, stop in
             if line == "\r\n" {
-                print(line)
+                // do nothing
             } else if line.hasPrefix("#EXTM3U") {
                 let info = line.replacingOccurrences(of: "#EXTINF:", with: "")
                 epgUrl = info.getAttribute("url-tvg")
@@ -29,7 +29,7 @@ public struct TVParser {
                 let item = TVPlayItem(name: name, tvg: tvg, group: group, url: "", raw: info)
 
                 current = item
-            } else if let url = URL(string: line.replacingOccurrences(of: " ", with: "")) {
+            } else if let url = URL(string: line.replacingOccurrences(of: " ", with: "").urlEncoded) {
                 current?.url = url.absoluteString
                 if let item = current {
                     items.append(item)
@@ -44,7 +44,7 @@ public struct TVParser {
                        tail = valid
                     }
                     
-                    if let url = URL(string: tail) {
+                    if let url = URL(string: tail.urlEncoded) {
                         let item = TVPlayItem(name: name, tvg: nil, group: group ?? "", url: url.absoluteString, raw: line)
                         items.append(item)
                     } else {
@@ -52,7 +52,7 @@ public struct TVParser {
                     }
                 }
             } else {
-                if let url = URL(string: line) {
+                if let url = URL(string: line.urlEncoded) {
                     current?.url = url.absoluteString
                     if let item = current {
                         items.append(item)
